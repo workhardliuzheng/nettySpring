@@ -1,0 +1,39 @@
+#开发常见问题请参考：http://doc.io/common-knowledge/faq/dev101.html
+#spring.application.name是应用（服务）的唯一标识，全局唯一，请使用一致、清晰易懂的命名
+
+spring:
+  application:
+    name: netty-spring
+  profiles:
+    active: beta
+  cache:
+    enable: true
+  aop:
+    auto: true
+  sentinel:
+    statistic:
+      max-rt-ms: 4900
+    logging:
+      type: file
+#tomcat配置，test/off/production会自动通过命令行参数指定server.port端口和accesslog目录
+server:
+  tomcat:
+    max-threads: 700
+    uri-encoding: UTF-8
+    #注意，如果有上传文件的应用，推荐指定下basedir,tomcat用来临时缓存文件的目录，可用运维的配置文件里读取
+    #basedir: {MATRIX.PRIVATE_DATA_DIR}
+    accesslog:
+      enabled: true
+      pattern: '%{yyyy-MM-dd HH:mm:ss.SSS}t [%{X-Trace-Id}o | %I] %a "%{X-Real-Ip}i" "%{X-OAuth-Client}i" "%{X-Client-Name}i" %U %m  %s %D'
+    compression:
+      enabled: true
+      mime-types: application/json,application/javascript,application/xhtml+xml,text/html,text/xml,text/plain,text/css
+
+
+
+netty:
+  boss: 1
+  worker: 4
+  timeout: 6000
+  port: 9990
+  host: 127.0.0.1
