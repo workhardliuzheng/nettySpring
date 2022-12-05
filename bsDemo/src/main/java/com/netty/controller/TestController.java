@@ -15,7 +15,7 @@ public class TestController {
     @RequestMapping("/test")
     public String test(@RequestParam("test") String test) throws InterruptedException {
         Message message = new Message();
-        test = test + '\n';
+        test = test + "_$";
         byte[] bytes = test.getBytes();
         message.setContent(bytes);
         message.setLen(bytes.length);

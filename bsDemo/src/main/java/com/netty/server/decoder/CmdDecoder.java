@@ -3,14 +3,19 @@ package com.netty.server.decoder;
 import com.netty.entity.Cmd;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class CmdDecoder extends LineBasedFrameDecoder {
+public class CmdDecoder extends DelimiterBasedFrameDecoder {
 
     public CmdDecoder(int maxLength) {
         super(maxLength);
+    }
+
+    public CmdDecoder(int maxFrameLength, ByteBuf... delimiters) {
+        super(maxFrameLength, delimiters);
     }
 
     public CmdDecoder(int maxLength, boolean stripDelimiter, boolean failFast) {
